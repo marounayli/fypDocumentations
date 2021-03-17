@@ -290,6 +290,13 @@ Else, the pull request can't be accepted until changes are done and checks pass.
 ## Additional Features ##
  
 ### Showing the pipeline steps in the pull request. ###
+You might want to show the Jenkins pipeline steps in the github pull request:
+
+![Pipeline steps Github](pictures/pipeline_steps_github.png)
+
+
+![Pipeline steps Github](pictures/github_checks_fail.png)
+
 
 In order to show the pipeline steps within github we need the following:
 
@@ -319,7 +326,6 @@ The first step is to create a Github application with limited access to the repo
 Once you create the application; you need to install it.
 Install it only for the repository you need to pipeline to run on.
 Finally to allow Jenkins to post the pipeline steps to Git it needs a special type of authentication to the Github app. This is why you download the app private key found on the bottom of the app page.
-
 ## Authenticate GitHub app to Jenkins
 
 ### Converting the key
