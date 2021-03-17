@@ -319,3 +319,49 @@ The first step is to create a Github application with limited access to the repo
 Once you create the application; you need to install it.
 Install it only for the repository you need to pipeline to run on.
 Finally to allow Jenkins to post the pipeline steps to Git it needs a special type of authentication to the Github app. This is why you download the app private key found on the bottom of the app page.
+
+## Authenticate GitHub app to Jenkins
+
+### Converting the key
+
+After a couple of seconds the key will be downloaded to your downloads folder.
+
+Now you need to convert the key into a different format that Jenkins can use:
+
+```shell
+openssl pkcs8 -topk8 -inform PEM -outform PEM -in key-in-your-downloads-folder.pem -out converted-github-app.pem -nocrypt
+```
+
+### Adding the Jenkins credential
+
+- Go to your created pipeline
+
+- Pick 'Configure'
+
+- Choose 'Pipeline' and change Git SCM credentials
+
+- Click Add -> Jenkins and fill out the form:
+
+      Kind: GitHub app
+
+      ID: i.e. github-app (could be anything as long as no other credential have the same ID)
+
+      App ID: the github app ID, it can be found in the 'About' section of your GitHub app in the general tab.
+      
+    ![Failed Checks Github](./pictures/App_ID_github.png)
+
+      API endpoint (optional, only required for GitHub enterprise this will only show up if a GitHub enterprise server is configured).
+
+      Key: click add, paste the contents of the converted private key
+
+- Click Add
+
+
+### Downloading Checks API plugin
+
+**To Download the plugin:**
+* On the top left corner go to dashboard.
+* On the left menu-bar select **Manage Jenkins**
+* Click on **Manage Plugins**
+* Go to the **Available** section and search for *Checks API plugin*
+* Tick the checkbox and on the bottom of the page click **Install without restart** 
